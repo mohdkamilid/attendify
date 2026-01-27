@@ -4,15 +4,18 @@ import { QueryClientProvider } from "@tanstack/react-query";
 import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import Dashboard from "@/pages/dashboard";
+import EmployeesPage from "@/pages/employees";
+import AttendancePage from "@/pages/attendance";
+import SettingsPage from "@/pages/settings";
 import NotFound from "@/pages/not-found";
 
 function Router() {
   return (
     <Switch>
       <Route path="/" component={Dashboard} />
-      {/* For now, direct all these to dashboard or not found until we build them */}
-      <Route path="/employees" component={Dashboard} /> 
-      <Route path="/attendance" component={Dashboard} />
+      <Route path="/employees" component={EmployeesPage} />
+      <Route path="/attendance" component={AttendancePage} />
+      <Route path="/settings" component={SettingsPage} />
       <Route component={NotFound} />
     </Switch>
   );
