@@ -15,11 +15,7 @@ import {
   SheetTrigger,
 } from "@/components/ui/sheet";
 
-interface SidebarProps {
-  children: React.ReactNode;
-}
-
-export function Layout({ children }: SidebarProps) {
+export function Layout({ children }) {
   const [location] = useLocation();
 
   const navItems = [

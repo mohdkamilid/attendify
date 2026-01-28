@@ -1,26 +1,7 @@
 import { useState } from 'react';
 import { addDays, format, subDays, isSameDay } from 'date-fns';
 
-export type Status = 'present' | 'absent' | 'late' | 'leave';
-
-export interface Employee {
-  id: string;
-  name: string;
-  role: string;
-  department: string;
-  avatar: string;
-}
-
-export interface AttendanceRecord {
-  id: string;
-  employeeId: string;
-  date: Date;
-  status: Status;
-  checkIn?: string;
-  checkOut?: string;
-}
-
-const EMPLOYEES: Employee[] = [
+const EMPLOYEES = [
   { id: '1', name: 'Alex Morgan', role: 'Frontend Dev', department: 'Engineering', avatar: 'AM' },
   { id: '2', name: 'Sarah Chen', role: 'Product Designer', department: 'Design', avatar: 'SC' },
   { id: '3', name: 'James Wilson', role: 'Product Manager', department: 'Product', avatar: 'JW' },
@@ -28,8 +9,8 @@ const EMPLOYEES: Employee[] = [
   { id: '5', name: 'David Kim', role: 'QA Engineer', department: 'Engineering', avatar: 'DK' },
 ];
 
-const generateMockAttendance = (): AttendanceRecord[] => {
-  const records: AttendanceRecord[] = [];
+const generateMockAttendance = () => {
+  const records = [];
   const today = new Date();
   
   // Generate for last 7 days
@@ -41,9 +22,9 @@ const generateMockAttendance = (): AttendanceRecord[] => {
 
     EMPLOYEES.forEach(emp => {
       const rand = Math.random();
-      let status: Status = 'present';
-      let checkIn: string | undefined = '09:00';
-      let checkOut: string | undefined = '17:00';
+      let status = 'present';
+      let checkIn = '09:00';
+      let checkOut = '17:00';
 
       if (rand > 0.9) {
         status = 'absent';
@@ -75,10 +56,10 @@ const generateMockAttendance = (): AttendanceRecord[] => {
 let MOCK_RECORDS = generateMockAttendance();
 
 export const useMockData = () => {
-  const [records, setRecords] = useState<AttendanceRecord[]>(MOCK_RECORDS);
-  const [date, setDate] = useState<Date>(new Date());
+  const [records, setRecords] = useState(MOCK_RECORDS);
+  const [date, setDate] = useState(new Date());
 
-  const getStatsForDate = (targetDate: Date) => {
+  const getStatsForDate = (targetDate) => {
     const dailyRecords = records.filter(r => isSameDay(r.date, targetDate));
     return {
       total: EMPLOYEES.length,
@@ -89,8 +70,8 @@ export const useMockData = () => {
     };
   };
 
-  const markAttendance = (employeeId: string, status: Status) => {
-    const newRecord: AttendanceRecord = {
+  const markAttendance = (employeeId, status) => {
+    const newRecord = {
       id: `${employeeId}-${format(date, 'yyyy-MM-dd')}-${Math.random()}`,
       employeeId,
       date: date,

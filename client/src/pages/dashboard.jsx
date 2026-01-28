@@ -1,5 +1,5 @@
 import { Layout } from "@/components/layout";
-import { useMockData, Status } from "@/lib/mock-data";
+import { useMockData } from "@/lib/mock-data";
 import { format, isSameDay } from "date-fns";
 import { 
   Card, 
@@ -40,7 +40,7 @@ export default function Dashboard() {
   const { employees, records, currentDate, setDate, getStatsForDate, markAttendance } = useMockData();
   const stats = getStatsForDate(currentDate);
 
-  const getStatusColor = (status: Status) => {
+  const getStatusColor = (status) => {
     switch (status) {
       case 'present': return "bg-green-100 text-green-700 border-green-200 hover:bg-green-100";
       case 'absent': return "bg-red-100 text-red-700 border-red-200 hover:bg-red-100";
@@ -162,7 +162,7 @@ export default function Dashboard() {
                       <TableCell className="text-right">
                         <Select 
                           value={status} 
-                          onValueChange={(val) => markAttendance(employee.id, val as Status)}
+                          onValueChange={(val) => markAttendance(employee.id, val)}
                         >
                           <SelectTrigger className="w-[110px] h-8 text-xs ml-auto">
                             <SelectValue placeholder="Mark" />

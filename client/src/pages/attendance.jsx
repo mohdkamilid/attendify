@@ -23,7 +23,7 @@ import { useState } from "react";
 
 export default function AttendancePage() {
   const { currentDate, setDate } = useMockData();
-  const [view, setView] = useState<'daily' | 'monthly'>('daily');
+  const [view, setView] = useState('daily');
 
   // Mock data for the chart
   const chartData = Array.from({ length: 7 }).map((_, i) => {
